@@ -1,0 +1,348 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Bookstore API",
+    "description": "API for managing books and lends"
+    
+  },
+  "tags": [
+    {
+      "name": "Books",
+      "description": "Endpoints for managing books"
+    },
+    {
+      "name": "Lends",
+      "description": "Endpoints for managing lends"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "tags":["Books"],
+        "summary": "Get all books",
+        "responses": {
+          "200": {
+            "description": "A list of books",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags":["Books"],
+        "summary": "Create a new book",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{isbn}": {
+      "get": {
+        "tags":["Books"],
+        "summary": "Get a book by ISBN",
+        "parameters": [
+          {
+            "name": "isbn",
+            "in": "path",
+            "required": true,
+            "description": "ISBN of the book",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags":["Books"],
+        "summary": "Update a book by ISBN",
+        "parameters": [
+          {
+            "name": "isbn",
+            "in": "path",
+            "required": true,
+            "description": "ISBN of the book",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags":["Books"],
+        "summary": "Partially update a book by ISBN",
+        "parameters": [
+          {
+            "name": "isbn",
+            "in": "path",
+            "required": true,
+            "description": "ISBN of the book",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Partially updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags":["Books"],
+        "summary": "Delete a book by ISBN",
+        "parameters": [
+          {
+            "name": "isbn",
+            "in": "path",
+            "required": true,
+            "description": "ISBN of the book",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lends": {
+      "get": {
+        "tags":["Lends"],
+        "summary": "Get all lends",
+        "responses": {
+          "200": {
+            "description": "A list of lends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lend"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags":["Lends"],
+        "summary": "Create a new lend",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lend"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lend"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lends/{id}": {
+      "get": {
+        "tags":["Lends"],
+        "summary": "Get a lend by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the lend",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A lend",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lend"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags":["Lends"],
+        "summary": "Delete a lend by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the lend",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lend"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "isbn": {
+            "type": "string",
+            "description": "ISBN of the book"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the book"
+          },
+          "year": {
+            "type": "string",
+            "description": "Year of publication"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author of the book"
+          }
+        },
+        "required": ["isbn", "title", "year", "author"]
+      },
+      "Lend": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the lend"
+          },
+          "borrowed_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Borrowing date and time"
+          },
+          "returned_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Returning date and time"
+          }
+        },
+        "required": ["id", "borrowed_at"]
+      }
+    }
+  }
+}
